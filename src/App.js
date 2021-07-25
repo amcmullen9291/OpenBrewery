@@ -1,24 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import MainPage from './Components/MainPage';
+import SelectedBrewery from './Components/SelectedBrewery';
+import AllBreweries from './Components/AllBreweries'
+import StateToState from './Components/StateToState'
+import Welcome from './Components/Welcome'
+import Signup from './Components/Signup'
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Router>
+      <Switch>
+          <Route path={"/"} exact component={Welcome}/>
+          <Route path={"/CityBreweries"} exact component={MainPage}/>
+          <Route path={"/CityBreweries/AllBreweries/:state/:name"} exact component={SelectedBrewery}/>
+          <Route path={"/CityBreweries/AllBreweries"} exact component={AllBreweries}/>
+          <Route path={"/CityBreweries/AllBreweries/:state"} exact component={StateToState}/>  
+          <Route path={"/CityBreweries/Registation"} exact component={Signup}/>  
+          <Redirect to={"/"} />
+        </Switch>
+    </Router>
+    </>
   );
 }
 
