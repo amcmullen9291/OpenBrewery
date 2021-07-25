@@ -50,3 +50,48 @@
     #d7d7d7, #c3c3c3, #cccccc, #c6c6c6);
 
 }
+
+.newMainPageButton{
+    height: 3em;
+    background:conic-gradient(#edc800, #e3b600, #f3cf00, #ffe800,
+								#edc800, #e3b600, #f3cf00, #ffe800,
+								#edc800, #e3b600, #f3cf00, #ffe800,
+								#edc800, #e3b600, #f3cf00, #ffe800)
+}
+
+.mainPageWelcome{
+    margin-top: 1%;
+    height: 3.75em;
+    width: 11em;
+	background:conic-gradient(#d95641, #b14439, #b2453a, #d25645, 
+								#d95641, #b14439, #b2453a, #d25645,
+								#d95641, #b14439, #b2453a, #d25645,
+								#d95641, #b14439, #b2453a, #d25645);
+}
+
+
+.returnLink {
+    color: darkslategray;
+    font-size: 18px;
+    text-align: right;
+    margin-left: 85%;
+}
+
+.StateMenus{
+    width:fit-content;
+    display: hidden;
+}
+
+
+#regionList {
+    margin-top: 8%;
+	display: none;
+	height: 100%; 
+	width: 17%; /* Set the width of the sidebar */
+	position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+	z-index: 1; /* Stay on top */
+	top: 0; /* Stay at the top */
+	left: 0;
+	overflow-x: hidden; /* Disable horizontal scroll */
+	padding-top: 20px;
+  }
