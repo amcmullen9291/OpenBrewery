@@ -16,6 +16,6 @@ export const selectedBrewery = (brewery) => {
 export const deleteBrewery = (brewery) => {
     return {
         type: ActionTypes.REMOVE_SELECTED_BREWERY,
-        payload: newEntry
+        payload: brewery
     }
 }

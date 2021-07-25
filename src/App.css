@@ -1,0 +1,48 @@
+.look_around {
+    margin-top: 1%;
+    height: 3em;
+	background:conic-gradient(#d95641, #b14439, #b2453a, #d25645, 
+								#d95641, #b14439, #b2453a, #d25645,
+								#d95641, #b14439, #b2453a, #d25645,
+								#d95641, #b14439, #b2453a, #d25645);
+}
+
+.sign_in {
+    height: 2em;
+	background:conic-gradient(#e6e9bf, #d2b5aa, #cbaea3, #d4b5ab,
+								#e6e9bf, #d2b5aa, #cbaea3, #d4b5ab,
+								#e6e9bf, #d2b5aa, #cbaea3, #d4b5ab,
+								#e6e9bf, #d2b5aa, #cbaea3, #d4b5ab);
+} 
+
+.welcomePage{
+    background-image: url("./Images/CityBrewery.jpeg");
+    height: 200px;
+    margin-right: 25%;
+    margin-left: 25%;
+    margin-top: 10%;
+
+}
+
+.welcomeBanner {
+    font-size: 36px;
+    color: ivory
+}
+
+.frontPage {
+    background:conic-gradient(#d95641, #b14439, #b2453a, #d25645, 
+    #d95641, #b14439, #b2453a, #d25645,
+    #d95641, #b14439, #b2453a, #d25645,
+    #d95641, #b14439, #b2453a, #d25645);
+}
+
+.front{
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    background:conic-gradient(#d7d7d7, #c3c3c3, #cccccc, #c6c6c6,
+    #d7d7d7, #c3c3c3, #cccccc, #c6c6c6,
+    #d7d7d7, #c3c3c3, #cccccc, #c6c6c6,
+    #d7d7d7, #c3c3c3, #cccccc, #c6c6c6);
+
+}

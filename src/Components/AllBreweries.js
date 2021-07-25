@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { connect, useSelector } from 'react-redux';
-import SelectedEntry from './SelectedEntry';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { setBreweries } from '../Actions/EntryActions';
+import { setBreweries } from '../Actions/BreweryActions';
 
 const AllBreweries = () => {
   const breweries = useSelector((state) => state);
@@ -16,18 +15,13 @@ const AllBreweries = () => {
     dispatch(setBreweries(response.data));
   };
 
-  
-
-  useEffect(() => {
-    fetchIndex();
-  }, [])
 
   if (breweries) {
     var BreweryIndex = breweries.map(brewery => {
-      const {id, name, state } = entry.attributes;
-      console.log(entry.id);
+      const {id, name, state } = brewery.attributes
+      console.log(brewery.id);
       return (<ul key={id}>
-        <li><a href={`/CityBreweries/AllBreweries/StateToState/${entry.id}`}>{name}, {state}</a></li>
+        <li><a href={`/CityBreweries/AllBreweries/StateToState/${brewery.id}`}>{name}, {state}</a></li>
         </ul>)
     })
   }

@@ -1,5 +1,4 @@
 import { ActionTypes } from '../Constants/Action.type';
-import concatenateReducers from 'redux-concatenate-reducers';
 
 const initialState = {
     breweries: [],
