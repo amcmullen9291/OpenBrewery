@@ -1,9 +1,27 @@
-import React, { PureComponent } from 'react'
+import React, { useEffect } from 'react'
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setBreweries } from '../Actions/BreweryActions';
+
+import { connect } from 'react-redux';
 import Swal from 'sweetalert2'
 
-export default class Welcome extends PureComponent {
+const Welcome =() => {
+  const dispatch = useDispatch();
 
-  render() {
+  const fetchBreweries = async () => {
+    const response = await axios.get('https://api.openbrewerydb.org/breweries')
+    .then(response => {dispatch(setBreweries(response))})
+    .catch((error) => {
+      console.log("Error:", error);
+    });
+  };
+
+  useEffect(() => {
+    fetchBreweries();
+  }, [])
+
+
     return (
       <div className="front">
       <div className="frontPage">
@@ -16,7 +34,6 @@ export default class Welcome extends PureComponent {
       </div>
       </div>
     )
-  }
 }
 
 function register (e){
@@ -91,3 +108,16 @@ function loggingIn(){
     Swal.fire(JSON.stringify(formValues))
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    Breweries: state.Breweries
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  console.log("function is being called")
+  return{
+    findBrewery: (Brewery) => { dispatch({type: 'SELECTED_BREWERY', Brewery})}
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Welcome);

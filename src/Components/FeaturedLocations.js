@@ -1,38 +1,69 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { useSelector } from 'react-redux';
 // import Likes  from './likes'
 
 
- const FeaturedLocations = () => {
-  const Breweries = useSelector((state) => state.Breweries);
-  console.log ("Feature Component Data:", Breweries)
+ const FeaturedLocations = async() => {
+  const Featured1 = [];
+  const Featured2 = [];
+  const Featured3 = [];
+   
+  const BreweriesData = useState(state => state.Breweries.Breweries);
+  console.log ("Feature Component Data:", BreweriesData)
   const X = Math.floor((Math.random() * 10) + 1);
+  const Y = Math.floor((Math.random() * 10) + 1);
+  const Z = Math.floor((Math.random() * 10) + 1);
+
+ if(BreweriesData){
+  let Featured1 = BreweriesData.data[X];
+  let Featured2 = BreweriesData.data[Y];
+  let Featured3 = BreweriesData.data[Z];
 
 
-  const FeaturedLocations =() =>{
-    if(Breweries){
-        const id = Breweries.brewery.data[X].id;
-        const State = Breweries.brewery.data[X].state;
-        const City = Breweries.brewery.data[X].city;
-        const Location = Breweries.brewery.data[X].name;
-
-        console.log("Named Brewery:", Location)
-        return (
-        <tr key={id}>
-          <td><a href={`/CityBreweries/AllBreweries/${State}`}>{State}</a></td>
-          <td>{City}</td>
-          <td><a href={`/CityBreweries/AllBreweries/${State}/${Location}`}>{Location}</a></td>
-          </tr>)
-      }
-    }
+  console.log("Random#1:", Featured1 )
+  console.log("Random#2:", Featured2 )
+  console.log("Random#3:", Featured3 )
+ 
     return(
       <>
-      <div>{FeaturedLocations}</div>
+      <hr/>
+      <br/>
+      <center>
+        <p>Featured Locations</p>
+<table>
+    <thead>
+        <tr>
+            <th colspan="5">Featured Breweries</th>
+        </tr>
+        <tr>
+          <th>State</th>
+          <th>City</th>
+          <th>Location</th>
+          <th></th>
+          <th>Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>StateFarm</td>
+            <td>LaGrange</td>
+            <td>Mine</td>
+            <td></td>
+            <td>Chilly</td>
+        </tr>
+        <tr></tr>
+    </tbody>
+</table>
+</center>
       </>
     )
   }
-
-  // const title = notes[0].attributes.title;
-  // const title2 = notes[1].attributes.title;
-  // const title3 = notes[2].attributes.title;
-export default FeaturedLocations;
+}
+  const mapStateToProps = (state, Breweries) => {
+    return {
+      Breweries: state.Breweries
+    }
+  
+  }
+export default connect(mapStateToProps)(FeaturedLocations);

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect, useSelector } from 'react-redux';
 // import FeaturedLocations from './FeaturedLocations';
 import Swal from 'sweetalert2'
@@ -42,9 +42,8 @@ const defaultOption6 = NorthEast[0];
 const defaultOption7 = SouthEast[0];
 
 const MainPage = () => {
-  const Breweries = useSelector((state) => state.Breweries);
+  const BreweriesData = useSelector((state) => state.Breweries);
   const dispatch = useDispatch();
-  let BreweryObject;
 
   const fetchBreweries = async () => {
     const response = await axios.get('https://api.openbrewerydb.org/breweries')
@@ -76,7 +75,6 @@ const MainPage = () => {
   }
 
 async function FindZip() {
-  const Bars ="";
   const { value: text } = await Swal.fire({
     input: 'textarea',
     inputLabel: 'OpenBrewery',
@@ -99,7 +97,64 @@ async function FindZip() {
     fetchBreweries();
   }, [])
 
-  console.log("Brewery Index:", Breweries)
+  console.log ("Feature Component Data in Main:", BreweriesData.Breweries)
+  const X = Math.floor((Math.random() * 10) + 1);
+
+
+if(Object.keys(BreweriesData).length > 1){
+  console.log("Featured:", BreweriesData.Breweries.data[0]);
+
+  const FeaturedOne = BreweriesData.Breweries.data[X+1];
+  const FeaturedTwo = BreweriesData.Breweries.data[X+2]
+  const FeaturedThree = BreweriesData.Breweries.data[X]
+
+  console.log("Brewery Index:", BreweriesData)
+  var FeaturedLocations = (
+    <table>
+    <thead>
+        <tr>
+            <th colSpan="5">Featured Breweries:</th>
+        </tr>
+        <tr>
+          <th>State</th>
+          <th>City</th>
+          <th>Location</th>
+          <th></th>
+          <th>Brewery Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href={`/CityBreweries/AllBreweries/${FeaturedOne.state}`}>{FeaturedOne.state}</a></td>
+            <td>{FeaturedOne.city}</td>
+            <td><a href={`/CityBreweries/AllBreweries/${FeaturedOne.state}/${FeaturedOne.name}`}>{FeaturedOne.name}</a></td>
+            <td></td>
+            <td>{FeaturedOne.brewery_type}</td>
+        </tr>
+        <tr>
+          <td id="filler" colSpan="5"></td>
+        </tr>
+        <tr>
+        <td><a href={`/CityBreweries/AllBreweries/${FeaturedTwo.state}`}>{FeaturedTwo.state}</a></td>
+            <td>{FeaturedTwo.city}</td>
+            <td><a href={`/CityBreweries/AllBreweries/${FeaturedTwo.state}/${FeaturedTwo.name}`}>{FeaturedTwo.name}</a></td>
+            <td></td>
+            <td>{FeaturedTwo.brewery_type}</td>
+        </tr>
+        <tr>
+          <td id="filler" colSpan="5"></td>
+        </tr>
+        <tr>
+        <td><a href={`/CityBreweries/AllBreweries/${FeaturedThree.state}`}>{FeaturedThree.state}</a></td>
+            <td>{FeaturedThree.city}</td>
+            <td><a href={`/CityBreweries/AllBreweries/${FeaturedThree.state}/${FeaturedThree.name}`}>{FeaturedThree.name}</a></td>
+            <td></td>
+            <td>{FeaturedThree.brewery_type}</td>
+        </tr>
+    </tbody>
+    </table> 
+    )
+}
   return (
     <>
     <div className="front">
@@ -114,8 +169,13 @@ async function FindZip() {
     </div>
     <center><button className="newMainPageButton" href="#">Peruse by:</button>
       <br></br><button className="sign_in" onClick={regionMenu}>State</button><button className="sign_in" onClick={FindZip}>Zip</button></center>
-<hr></hr>
-{/* <FeaturedLocations/> */}
+<hr/>
+<hr/>
+<div className="featuredSection">
+  <div>
+{FeaturedLocations}
+</div>
+</div>
 </div>
 
     <div id="regionList">
@@ -134,7 +194,7 @@ async function FindZip() {
 }
 const mapStateToProps = (state) => {
   return {
-    breweries: state.breweries
+    Breweries: state.Breweries
   }
 
 }
