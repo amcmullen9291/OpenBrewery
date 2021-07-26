@@ -4,20 +4,27 @@ import { useSelector } from 'react-redux';
 
 
  const FeaturedLocations = () => {
-  const Breweries = useSelector((state) => state);
+  const Breweries = useSelector((state) => state.Breweries);
+  console.log ("Feature Component Data:", Breweries)
+  const X = Math.floor((Math.random() * 10) + 1);
 
-  if (Breweries) {
-  var FeaturedLocations = Breweries.map(brewery => {
-        const {id, name, city, state } = Breweries.brewery.data;
+
+  const FeaturedLocations =() =>{
+    if(Breweries){
+        const id = Breweries.brewery.data[X].id;
+        const State = Breweries.brewery.data[X].state;
+        const City = Breweries.brewery.data[X].city;
+        const Location = Breweries.brewery.data[X].name;
+
+        console.log("Named Brewery:", Location)
         return (
         <tr key={id}>
-          <td><a href={`/CityBreweries/AllBreweries/${brewery.state}`}>{state}</a></td>
-          <td>{city}</td>
-          <td><a href={`/CityBreweries/AllBreweries/${brewery.state}/${breweries.name}`}>{name}</a></td>
+          <td><a href={`/CityBreweries/AllBreweries/${State}`}>{State}</a></td>
+          <td>{City}</td>
+          <td><a href={`/CityBreweries/AllBreweries/${State}/${Location}`}>{Location}</a></td>
           </tr>)
-      })
+      }
     }
-
     return(
       <>
       <div>{FeaturedLocations}</div>

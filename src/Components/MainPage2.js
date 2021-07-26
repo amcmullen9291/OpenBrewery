@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect, useSelector } from 'react-redux';
 // import FeaturedLocations from './FeaturedLocations';
+import Swal from 'sweetalert2'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import 'react-dropdown/style.css';
@@ -74,7 +75,25 @@ const MainPage = () => {
       window.location = statePage;
   }
 
+async function FindZip() {
+  const Bars ="";
+  const { value: text } = await Swal.fire({
+    input: 'textarea',
+    inputLabel: 'OpenBrewery',
+    inputPlaceholder: 'Enter A Zipcode...',
+    inputAttributes: {
+      'aria-label': 'Type your message here'
+    },
+    showCancelButton: true
+  })
   
+  if (text) {
+    Swal.fire(text);
+    fetch(`https://api.openbrewerydb.org/breweries?by_postal=${text}`)
+    .then(response => response.json())
+    .then(results => console.log("Results:", results))
+  }
+}
 
   useEffect(() => {
     fetchBreweries();
@@ -94,7 +113,7 @@ const MainPage = () => {
     </div></center>
     </div>
     <center><button className="newMainPageButton" href="#">Peruse by:</button>
-      <br></br><button className="sign_in" onClick={regionMenu}>State</button><button className="sign_in">Zip</button></center>
+      <br></br><button className="sign_in" onClick={regionMenu}>State</button><button className="sign_in" onClick={FindZip}>Zip</button></center>
 <hr></hr>
 {/* <FeaturedLocations/> */}
 </div>
