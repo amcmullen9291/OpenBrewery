@@ -67,13 +67,13 @@ class Home extends React.Component {
 <hr></hr>
       </div>
       <div id="regionList">
-<Dropdown options={West} onChange={(value) => console.log('change!', value)} value={defaultOption1} placeholder="Select an option"  className="StateMenus" id="West"/>;
-<Dropdown options={Mountains} onSelect={(value) => console.log('selected!', value)} onChange={(value) => console.log('change!', value)} value={defaultOption2} placeholder="Select an option"  className="StateMenus" id="Mountains"/>;
-<Dropdown options={Midsouth} onSelect={(value) => console.log('selected!', value)} onChange={(value) => console.log('change!', value)} value={defaultOption3} placeholder="Select an option"  className="StateMenus" id="Midsouth"/>;
-<Dropdown options={Upper_Midwest} onSelect={(value) => console.log('selected!', value)} onChange={this._onSelect} value={defaultOption4} placeholder="Select an option"  className="StateMenus" id="Upper_Midwest"/>;
-<Dropdown options={MidWest} onSelect={(value) => console.log('selected!', value)} onChange={this._onSelect} value={defaultOption5} placeholder="Select an option"  className="StateMenus" id="Midwest"/>;
-<Dropdown options={NorthEast} onSelect={(value) => console.log('selected!', value)} onChange={this._onSelect} value={defaultOption6} placeholder="Select an option"  className="StateMenus" id="NorthEast"/>;
-<Dropdown options={SouthEast} onSelect={(value) => console.log('selected!', value)} onChange={this._onSelect} value={defaultOption7} placeholder="Select an option"  className="StateMenus" id="SouthEast"/>;
+<Dropdown options={West} onChange={(value) => {selectedState(value)}} value={defaultOption1} placeholder="Select an option"  className="StateMenus" id="West"/>;
+<Dropdown options={Mountains} onChange={(value) => {selectedState(value)}} value={defaultOption2} placeholder="Select an option"  className="StateMenus" id="Mountains"/>;
+<Dropdown options={Midsouth}  onChange={(value) => {selectedState(value)}} value={defaultOption3} placeholder="Select an option"  className="StateMenus" id="Midsouth"/>;
+<Dropdown options={Upper_Midwest}  onChange={(value) => {selectedState(value)}} value={defaultOption4} placeholder="Select an option"  className="StateMenus" id="Upper_Midwest"/>;
+<Dropdown options={MidWest}  onChange={(value) => {selectedState(value)}} value={defaultOption5} placeholder="Select an option"  className="StateMenus" id="Midwest"/>;
+<Dropdown options={NorthEast}  onChange={(value) => {selectedState(value)}} value={defaultOption6} placeholder="Select an option"  className="StateMenus" id="NorthEast"/>;
+<Dropdown options={SouthEast}  onChange={(value) => {selectedState(value)}} value={defaultOption7} placeholder="Select an option"  className="StateMenus" id="SouthEast"/>;
 </div>
 
         </>
@@ -89,14 +89,17 @@ function regionMenu() {
     }
   }
 
-  function hideMap(){
-    var y = document.getElementById("regionList");
-    if (y.style.display === "block") {
-      y.style.display = "block";
-    } else {
-      y.style.display = "none";
-    }
 
+  function selectedState(state){
+    console.log("Selected State:", state);
+    var y = document.getElementById("regionList");
+      y.style.display = "none";
+      var base = "/CityBreweries/AllBreweries/" 
+      var extension = state.value;
+      var statePage = base+extension
+      console.log("New Url:", statePage)
+      window.location = statePage;
+  ;
   }
 
   export default Home;
