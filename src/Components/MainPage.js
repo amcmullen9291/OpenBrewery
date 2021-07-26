@@ -36,17 +36,20 @@ const defaultOption5 = MidWest[0];
 const defaultOption6 = NorthEast[0];
 const defaultOption7 = SouthEast[0];
 
-
+let X = Math.floor((Math.random() * 10) + 1);
 class Home extends React.Component {
 
 
   componentDidMount = async() => {
+     let BreweryObject;
     await axios.get("https://api.openbrewerydb.org/breweries")
-    .then(response => {console.log("Response:", response)})
+    .then(response => {BreweryObject = response})
     .catch((error) => {
       console.log("Error:", error);
     });
-
+    console.log("State:",BreweryObject.data[X].state);
+    console.log("City:", BreweryObject.data[X].city);
+    console.log("Brewery:", BreweryObject.data[X].name);
   }
 
     render() {
@@ -65,7 +68,14 @@ class Home extends React.Component {
       <center><button className="newMainPageButton" href="#">Peruse by:</button>
         <br></br><button className="sign_in" onClick={regionMenu}>State</button><button className="sign_in">Zip</button></center>
 <hr></hr>
-      </div>
+<div>
+  <p>A Featured Brewery:</p>
+  <tr>
+    <td>Featured</td>
+  </tr>
+  </div>
+</div>
+
       <div id="regionList">
 <Dropdown options={West} onChange={(value) => {selectedState(value)}} value={defaultOption1} placeholder="Select an option"  className="StateMenus" id="West"/>;
 <Dropdown options={Mountains} onChange={(value) => {selectedState(value)}} value={defaultOption2} placeholder="Select an option"  className="StateMenus" id="Mountains"/>;
@@ -99,7 +109,6 @@ function regionMenu() {
       var statePage = base+extension
       console.log("New Url:", statePage)
       window.location = statePage;
-  ;
   }
 
   export default Home;
