@@ -1,15 +1,13 @@
 import React, { useEffect } from 'react'
 import { connect, useSelector } from 'react-redux';
-import FeaturedLocations from './FeaturedLocations';
+// import FeaturedLocations from './FeaturedLocations';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import 'react-dropdown/style.css';
-
-
 import { useDispatch } from 'react-redux';
 import Dropdown from 'react-dropdown';
-
 import { setBreweries } from '../Actions/BreweryActions';
+// import FeaturedLocations from './FeaturedLocations';
 
 const West = [
   'West Coast', 'California', 'Hawaii', 'Nevada', 'Oregon', 'Washington'
@@ -43,14 +41,16 @@ const defaultOption6 = NorthEast[0];
 const defaultOption7 = SouthEast[0];
 
 const MainPage = () => {
-  const breweries = useSelector((state) => state.Breweries);
+  const Breweries = useSelector((state) => state.Breweries);
   const dispatch = useDispatch();
+  let BreweryObject;
 
   const fetchBreweries = async () => {
-    const response = await axios.get('https://api.openbrewerydb.org/breweries').catch((error) => {
+    const response = await axios.get('https://api.openbrewerydb.org/breweries')
+    .then(response => {dispatch(setBreweries(response))})
+    .catch((error) => {
       console.log("Error:", error);
     });
-    dispatch(setBreweries(response.data));
   };
 
   function regionMenu() {
@@ -80,7 +80,7 @@ const MainPage = () => {
     fetchBreweries();
   }, [])
 
-  console.log("Brewery Index:", breweries)
+  console.log("Brewery Index:", Breweries)
   return (
     <>
     <div className="front">
@@ -96,13 +96,7 @@ const MainPage = () => {
     <center><button className="newMainPageButton" href="#">Peruse by:</button>
       <br></br><button className="sign_in" onClick={regionMenu}>State</button><button className="sign_in">Zip</button></center>
 <hr></hr>
-<div>
-<p>Featured Breweries:</p>
-<table id="FeaturedLocations">
-      <FeaturedLocations/>
-  </table>
-
-</div>
+{/* <FeaturedLocations/> */}
 </div>
 
     <div id="regionList">
@@ -129,7 +123,7 @@ const mapStateToProps = (state) => {
      const mapDispatchToProps = (dispatch) => {
        console.log("function is being called")
        return{
-         findEntry: (entry) => { dispatch({type: 'SELECTED_BREWERY', brewery})}
+         findBrewery: (brewery) => { dispatch({type: 'SELECTED_BREWERY', brewery})}
        }
      }
 

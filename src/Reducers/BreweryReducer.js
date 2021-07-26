@@ -7,7 +7,7 @@ const initialState = {
 export const BreweryListReducer = (state=initialState, {type, payload}) => {
     switch (type) {
         case ActionTypes.SET_BREWERIES:
-            return { ...state, breweries: payload};
+            return { ...state, Breweries: payload};
         default:
             return state
     }

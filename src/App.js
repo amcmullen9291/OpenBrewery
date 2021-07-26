@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import Home from './Components/MainPage';
+// import Home from './Components/MainPage';
+import MainPage from './Components/MainPage2';
 import SelectedBrewery from './Components/SelectedBrewery';
 import AllBreweries from './Components/AllBreweries'
 import StateToState from './Components/StateToState'
@@ -14,7 +15,7 @@ function App() {
     <Router>
       <Switch>
           <Route path={"/"} exact component={Welcome}/>
-          <Route path={"/CityBreweries"} exact component={Home}/>
+          <Route path={"/CityBreweries"} exact component={MainPage}/>
           <Route path={"/CityBreweries/AllBreweries/:state/:name"} exact component={SelectedBrewery}/>
           <Route path={"/CityBreweries/AllBreweries"} exact component={AllBreweries}/>
           <Route path={"/CityBreweries/AllBreweries/:state"} exact component={StateToState}/>  
