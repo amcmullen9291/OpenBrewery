@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 // import Home from './Components/MainPage';
-import MainPage from './Components/MainPage2';
+import MainPage from './Components/MainPage';
 import SelectedBrewery from './Components/SelectedBrewery';
 import AllBreweries from './Components/AllBreweries'
 import StateToState from './Components/StateToState'

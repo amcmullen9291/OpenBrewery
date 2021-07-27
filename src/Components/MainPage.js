@@ -44,7 +44,9 @@ const MainPage = () => {
   const dispatch = useDispatch();
 
   const fetchBreweries = async () => {
-    const response = await axios.get('https://api.openbrewerydb.org/breweries')
+    const P = Math.floor((Math.random() * 15) + 1);
+
+    const response = await axios.get(`https://api.openbrewerydb.org/breweries?page=${P}`)
     .then(response => {dispatch(setBreweries(response))})
     .catch((error) => {
       console.log("Error:", error);

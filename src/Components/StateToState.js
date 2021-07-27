@@ -34,21 +34,21 @@ if(Object.keys(StateData).length > 1){
              <td>{state}</td>
              <td>{city}</td>
              <td><Link to={`/CityBreweries/AllBreweries/${state}/${name}`}>{name}</Link></td>
-             <td className="moreInfo">Click for Additional information</td>
          </tr>)
   }
   )
 }
   return (
     <>
-    <div>
+    <div id="StatePage">
+    <div id="StatePages">
       <Link to={"/CityBreweries"}>Return to Lobby</Link>
     </div>
     <div>
-    <table id="stateTable">
+    <table>
   <thead>
   <tr>
-      <th colSpan="5"></th>
+      <th colSpan="5">OpenBrewery</th>
   </tr>
   <tr>
     <th>State</th>
@@ -62,6 +62,22 @@ if(Object.keys(StateData).length > 1){
       </tbody>
    </table> 
 
+    </div>
+    <div id="sidenav">
+      <tr>
+      <td className="chartTitle">Telephone:</td>
+      <td className="chartData" id="chartData1"> </td>
+      </tr>
+      <tr>
+      <td className="chartTitle">Address:</td>
+      <td className="chartData" id="chartData2"> </td>
+      </tr>
+      <tr>
+      <td className="chartTitle">Website:</td>
+      <td className="chartData" id="chartData3"> </td>
+      </tr>
+
+    </div>
     </div>
       </>
     )

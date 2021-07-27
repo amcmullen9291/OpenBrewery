@@ -170,5 +170,51 @@ background-image: linear-gradient(315deg, #d8dede 0%, #e5bdf6 74%);
 #stateTable{
   border: 3px solid yellow;
   background: lightgrey;
+  width: 70%;
+  margin-left: 5%;
+  overflow-y: scroll;
 }
 
+#sidenav{
+  display: block;
+	height: 100%; /* Full-height: remove this if you want "auto" height */
+	width: 17%; /* Set the width of the sidebar */
+	position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+	/* z-index: 1;  */
+  /* Stay on top */
+	top: 25%; /* Stay at the top */
+	right: 0;
+}
+
+.chartTitle{
+        background-color: #cccfd1;
+        text-align: left;
+				text-transform: uppercase;
+				padding: .5rem;
+				font-weight: bold;
+				color: #000;
+				font-size: .9rem;
+}
+
+.chartData{
+  background-color:#e7e9ea;
+}
+
+#StatePage{
+  background:conic-gradient(#d7d7d7, #c3c3c3, #cccccc, #c6c6c6,
+  #d7d7d7, #c3c3c3, #cccccc, #c6c6c6,
+  #d7d7d7, #c3c3c3, #cccccc, #c6c6c6,
+  #d7d7d7, #c3c3c3, #cccccc, #c6c6c6);
+
+}
+
+#sign{
+  background:conic-gradient(#d7d7d7, #c3c3c3, #cccccc, #c6c6c6,
+  #d7d7d7, #c3c3c3, #cccccc, #c6c6c6,
+  #d7d7d7, #c3c3c3, #cccccc, #c6c6c6,
+  #d7d7d7, #c3c3c3, #cccccc, #c6c6c6);
+}
+
+#endpoint{
+  background: lightgreen;
+}
