@@ -10,7 +10,7 @@ import { setBreweries } from '../Actions/BreweryActions';
 
 const West = [
   'West Coast', 'California', 'Hawaii', 'Nevada', 'Oregon', 'Washington'
-];
+]; 
 const Mountains = [
   'Mountain States', 'Arizona', 'Colorado', 'Idaho', 'Montana', 'New Mexico', 'Utah', 'Wyoming'
 ];
@@ -76,8 +76,8 @@ async function ZipFind(){
   const { value: zip } = await Swal.fire({
     title: 'Open Brewery',
     input: 'text',
-    inputLabel: 'Enter a zip code.',
-    inputPlaceholder: 'enter zip here'
+    inputLabel: 'Enter zip code.',
+    inputPlaceholder: '(here would be fine)'
   })
   
   if (zip) {

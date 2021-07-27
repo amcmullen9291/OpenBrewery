@@ -13,6 +13,16 @@ export const BreweryListReducer = (state=initialState, {type, payload}) => {
     }
 };
 
+export const StateListReducer = (state=initialState, {type, payload}) => {
+    switch (type) {
+        case ActionTypes.SET_STATE_BREWERIES:
+            return { ...state, StateBreweries: payload};
+        default:
+            return state
+    }
+};
+
+
 export const SelectedBreweryReducer = (state={}, {type, payload}) => {
     switch (type) {
         case ActionTypes.SELECTED_BREWERY:

@@ -6,6 +6,14 @@ export const setBreweries = (breweries) => {
     }
 }
 
+export const stateBreweries = (statebreweries) => {
+    return {
+        type: ActionTypes.SET_STATE_BREWERIES,
+        payload: statebreweries,
+    }
+}
+
+
 export const selectedBrewery = (brewery) => {
     return {
         type: ActionTypes.SELECTED_BREWERY,
