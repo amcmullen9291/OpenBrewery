@@ -29,7 +29,8 @@ const Welcome =() => {
       <center><p className="welcomeBanner">OpenBrewery</p></center>
 
         <center><button className="look_around" onClick={consent}> Have a Look Around</button>
-        <br></br><button className="sign_in" onClick={loggingIn}>Sign-in</button><button className="sign_in" onClick={register}>Register</button></center>
+        {/* <br></br><button className="sign_in" onClick={loggingIn}>Sign-in</button><button className="sign_in" onClick={register}>Register</button> */}
+        </center>
       </div></center>
       </div>
       </div>
