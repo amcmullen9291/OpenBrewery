@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { connect, useSelector } from 'react-redux';
-// import FeaturedLocations from './FeaturedLocations';
 import Swal from 'sweetalert2'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -8,7 +7,6 @@ import 'react-dropdown/style.css';
 import { useDispatch } from 'react-redux';
 import Dropdown from 'react-dropdown';
 import { setBreweries } from '../Actions/BreweryActions';
-// import FeaturedLocations from './FeaturedLocations';
 
 const West = [
   'West Coast', 'California', 'Hawaii', 'Nevada', 'Oregon', 'Washington'
@@ -74,23 +72,64 @@ const MainPage = () => {
       window.location = statePage;
   }
 
-async function FindZip() {
-  const { value: text } = await Swal.fire({
-    input: 'textarea',
-    inputLabel: 'OpenBrewery',
-    inputPlaceholder: 'Enter A Zipcode...',
-    inputAttributes: {
-      'aria-label': 'Type your message here'
-    },
-    showCancelButton: true
+async function ZipFind(){
+  const { value: zip } = await Swal.fire({
+    title: 'Open Brewery',
+    input: 'text',
+    inputLabel: 'Enter a zip code.',
+    inputPlaceholder: 'enter zip here'
   })
   
-  if (text) {
-    Swal.fire(text);
-    fetch(`https://api.openbrewerydb.org/breweries?by_postal=${text}`)
-    .then(response => response.json())
-    .then(results => console.log("Results:", results))
-  }
+  if (zip) {
+    fetch(`https://api.openbrewerydb.org/breweries?by_postal=${zip}`)
+        .then(response => response.json())
+        .then(data => {console.log("Zip Search return:", data[0].name)})
+        .then(results => {      
+          Swal.fire({
+          title: "Top Result:",
+          title: results[0].name,
+          text: results.city
+        })
+  })    
+        
+        .catch(error => {
+          Swal.showValidationMessage(
+            `Request failed: ${error}`
+          )
+        })
+      }
+}
+
+
+async function FindZip() {
+  Swal.fire({
+    title: 'Submit your Github username',
+    input: 'text',
+    inputAttributes: {
+      autocapitalize: 'off'
+    },
+    showCancelButton: true,
+    confirmButtonText: 'Look up',
+    showLoaderOnConfirm: true,
+    preConfirm: (zip) => {
+      return fetch(`https://api.openbrewerydb.org/breweries?by_postal=${zip}`)
+        .then(response => response.json())
+        .then(data => {console.log("Zip Search return:", data)})
+            .catch(error => {
+          Swal.showValidationMessage(
+            `Request failed: ${error}`
+          )
+        })
+    },
+    allowOutsideClick: () => !Swal.isLoading()
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: result.name,
+        imageUrl: result.city
+      })
+    }
+  })
 }
 
   useEffect(() => {
@@ -113,7 +152,7 @@ if(Object.keys(BreweriesData).length > 1){
     <table>
     <thead>
         <tr>
-            <th colSpan="5">Featured Breweries:</th>
+            <th colSpan="5"></th>
         </tr>
         <tr>
           <th>State</th>
@@ -168,9 +207,12 @@ if(Object.keys(BreweriesData).length > 1){
     </div></center>
     </div>
     <center><button className="newMainPageButton" href="#">Peruse by:</button>
-      <br></br><button className="sign_in" onClick={regionMenu}>State</button><button className="sign_in" onClick={FindZip}>Zip</button></center>
+      <br></br><button className="sign_in" onClick={regionMenu}>State</button><button className="sign_in" onClick={ZipFind}>Zip</button></center>
 <hr/>
 <hr/>
+<div className="middleFill">
+  <p className="middleFill"><center>Featured Locations</center></p>
+</div>
 <div className="featuredSection">
   <div>
 {FeaturedLocations}
