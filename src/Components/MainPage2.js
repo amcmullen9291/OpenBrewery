@@ -83,15 +83,12 @@ async function ZipFind(){
   if (zip) {
     fetch(`https://api.openbrewerydb.org/breweries?by_postal=${zip}`)
         .then(response => response.json())
-        .then(data => {console.log("Zip Search return:", data[0].name)})
-        .then(results => {      
+        .then(data => {          
           Swal.fire({
           title: "Top Result:",
-          title: results[0].name,
-          text: results.city
-        })
-  })    
-        
+          html: `<a href="/CityBreweries/AllBreweries/${data[0].state}/${data[0].name}">${data[0].name}</a>`,
+          text: data[0].city
+        })})
         .catch(error => {
           Swal.showValidationMessage(
             `Request failed: ${error}`
@@ -101,36 +98,36 @@ async function ZipFind(){
 }
 
 
-async function FindZip() {
-  Swal.fire({
-    title: 'Submit your Github username',
-    input: 'text',
-    inputAttributes: {
-      autocapitalize: 'off'
-    },
-    showCancelButton: true,
-    confirmButtonText: 'Look up',
-    showLoaderOnConfirm: true,
-    preConfirm: (zip) => {
-      return fetch(`https://api.openbrewerydb.org/breweries?by_postal=${zip}`)
-        .then(response => response.json())
-        .then(data => {console.log("Zip Search return:", data)})
-            .catch(error => {
-          Swal.showValidationMessage(
-            `Request failed: ${error}`
-          )
-        })
-    },
-    allowOutsideClick: () => !Swal.isLoading()
-  }).then((result) => {
-    if (result.isConfirmed) {
-      Swal.fire({
-        title: result.name,
-        imageUrl: result.city
-      })
-    }
-  })
-}
+// async function FindZip() {
+//   Swal.fire({
+//     title: 'Submit your Github username',
+//     input: 'text',
+//     inputAttributes: {
+//       autocapitalize: 'off'
+//     },
+//     showCancelButton: true,
+//     confirmButtonText: 'Look up',
+//     showLoaderOnConfirm: true,
+//     preConfirm: (zip) => {
+//       return fetch(`https://api.openbrewerydb.org/breweries?by_postal=${zip}`)
+//         .then(response => response.json())
+//         .then(data => {console.log("Zip Search return:", data)})
+//             .catch(error => {
+//           Swal.showValidationMessage(
+//             `Request failed: ${error}`
+//           )
+//         })
+//     },
+//     allowOutsideClick: () => !Swal.isLoading()
+//   }).then((result) => {
+//     if (result.isConfirmed) {
+//       Swal.fire({
+//         title: result.name,
+//         imageUrl: result.city
+//       })
+//     }
+//   })
+// }
 
   useEffect(() => {
     fetchBreweries();
